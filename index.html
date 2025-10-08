@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persistent Timer App</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1><i class="fas fa-stopwatch"></i> Persistent Timer</h1>
+            <p>Manage your team timers with ease</p>
+        </header>
+        
+        <main class="main-content">
+            <div class="column running-column">
+                <div class="column-header">
+                    <h2><i class="fas fa-play-circle"></i> Running Teams</h2>
+                    <span class="timer-count" id="running-count">0</span>
+                </div>
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="search-timer" placeholder="Search teams..." oninput="renderTimers()">
+                </div>
+                <div id="running-timers" class="timers-container"></div>
+            </div>
+            
+            <div class="column add-column">
+                <div class="column-header">
+                    <h2><i class="fas fa-plus-circle"></i> Add New Timer</h2>
+                </div>
+                <form class="add-timer-form" id="timer-form">
+                    <div class="input-group">
+                        <label for="timer-name">Team Name</label>
+                        <input type="text" id="timer-name" placeholder="Enter team name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="timer-duration">Duration (minutes)</label>
+                        <input type="number" id="timer-duration" placeholder="Enter duration" min="1" max="9999" required>
+                    </div>
+                    <button type="submit" id="add-timer" class="btn btn-primary">
+                        <i class="fas fa-timer"></i> Start Timer
+                    </button>
+                </form>
+                
+                <div class="quick-actions">
+                    <h3>Quick Actions</h3>
+                    <div class="quick-buttons">
+                        <button class="btn btn-quick" onclick="quickTimer('Meeting', 30)">
+                            <i class="fas fa-users"></i> Meeting (30m)
+                        </button>
+                        <button class="btn btn-quick" onclick="quickTimer('Break', 15)">
+                            <i class="fas fa-coffee"></i> Break (15m)
+                        </button>
+                        <button class="btn btn-quick" onclick="quickTimer('Sprint', 60)">
+                            <i class="fas fa-rocket"></i> Sprint (60m)
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="column completed-column">
+                <div class="column-header">
+                    <h2><i class="fas fa-check-circle"></i> Completed Teams</h2>
+                    <span class="timer-count" id="completed-count">0</span>
+                </div>
+                <div class="completed-actions">
+                    <button class="btn btn-secondary btn-small" id="clear-completed">
+                        <i class="fas fa-trash"></i> Clear All
+                    </button>
+                </div>
+                <div id="completed-timers" class="timers-container"></div>
+            </div>
+        </main>
+    </div>
+
+    <div id="notification" class="notification hidden">
+        <i class="fas fa-bell"></i>
+        <span id="notification-text"></span>
+        <button class="notification-close" onclick="hideNotification()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
